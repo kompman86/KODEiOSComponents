@@ -1,0 +1,27 @@
+use_frameworks!
+inhibit_all_warnings!
+workspace 'Stories'
+platform :ios, '11.0'
+
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'Stories' do
+  pod 'SnapKit'
+  pod 'Kingfisher'
+end
+
+post_install do |installer|
+  installer.pods_project.build_configurations.each do |config|
+    config.build_settings['SWIFT_VERSION'] = '5'
+  end
+  installer.pods_project.targets.each do |target|
+    # Cache pod does not accept optimization level '-O', causing Bus 10 error. Use '-Osize' or '-Onone'
+    if target.name == 'Cache'
+      target.build_configurations.each do |config|
+        level = '-Osize'
+        config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = level
+        puts "Set #{target.name} #{config.name} to Optimization Level #{level}"
+      end
+    end
+  end
+end
