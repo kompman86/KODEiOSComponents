@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
 	s.homepage = "https://bitbucket.org/kode-t/kode-ios-components"
 
 	# 6
-	s.source = { :git => "git@git.kode-t.ru:base-code/kode-ios-components.git", 
+	s.source = { :git => "https://github.com/kompman86/kode-ios.git", 
 		     	 :branch => "develop", 
 	             :tag => s.version.to_s }
 
